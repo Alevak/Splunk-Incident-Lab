@@ -1,1 +1,1 @@
-Placeholder content for suspicious_powershell.spl
+index=main sourcetype=sysmon Image=*powershell.exe* CommandLine="*-enc*"

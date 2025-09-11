@@ -1,0 +1,1 @@
+Placeholder content for student_report_template.md

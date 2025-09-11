@@ -1,0 +1,1 @@
+Placeholder content for 01_splunk_setup.md

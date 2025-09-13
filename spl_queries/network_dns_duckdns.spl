@@ -1,0 +1,1 @@
+index=main sourcetype=dns_logs query="*.duckdns.org"

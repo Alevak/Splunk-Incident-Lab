@@ -1,0 +1,1 @@
+index=main sourcetype=linux_logs command="/tmp/*"

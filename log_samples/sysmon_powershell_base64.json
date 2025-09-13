@@ -1,1 +1,128 @@
-Placeholder content for sysmon_powershell_base64.json
+[
+  {
+    "timestamp": "2025-09-13T12:00:00Z",
+    "user": "attacker",
+    "command_line": "powershell.exe -enc aGVsbG8gd29ybGQ=",
+    "event_id": 4104
+  },
+  {
+    "timestamp": "2025-09-13T11:59:00Z",
+    "user": "user",
+    "command_line": "powershell.exe Write-Output 'Normal 0'",
+    "event_id": 4104
+  },
+  {
+    "timestamp": "2025-09-13T11:59:01Z",
+    "user": "user",
+    "command_line": "powershell.exe Write-Output 'Normal 1'",
+    "event_id": 4104
+  },
+  {
+    "timestamp": "2025-09-13T11:59:02Z",
+    "user": "user",
+    "command_line": "powershell.exe Write-Output 'Normal 2'",
+    "event_id": 4104
+  },
+  {
+    "timestamp": "2025-09-13T11:59:03Z",
+    "user": "user",
+    "command_line": "powershell.exe Write-Output 'Normal 3'",
+    "event_id": 4104
+  },
+  {
+    "timestamp": "2025-09-13T11:59:04Z",
+    "user": "user",
+    "command_line": "powershell.exe Write-Output 'Normal 4'",
+    "event_id": 4104
+  },
+  {
+    "timestamp": "2025-09-13T11:59:05Z",
+    "user": "user",
+    "command_line": "powershell.exe Write-Output 'Normal 5'",
+    "event_id": 4104
+  },
+  {
+    "timestamp": "2025-09-13T11:59:06Z",
+    "user": "user",
+    "command_line": "powershell.exe Write-Output 'Normal 6'",
+    "event_id": 4104
+  },
+  {
+    "timestamp": "2025-09-13T11:59:07Z",
+    "user": "user",
+    "command_line": "powershell.exe Write-Output 'Normal 7'",
+    "event_id": 4104
+  },
+  {
+    "timestamp": "2025-09-13T11:59:08Z",
+    "user": "user",
+    "command_line": "powershell.exe Write-Output 'Normal 8'",
+    "event_id": 4104
+  },
+  {
+    "timestamp": "2025-09-13T11:59:09Z",
+    "user": "user",
+    "command_line": "powershell.exe Write-Output 'Normal 9'",
+    "event_id": 4104
+  },
+  {
+    "timestamp": "2025-09-13T11:59:10Z",
+    "user": "user",
+    "command_line": "powershell.exe Write-Output 'Normal 10'",
+    "event_id": 4104
+  },
+  {
+    "timestamp": "2025-09-13T11:59:11Z",
+    "user": "user",
+    "command_line": "powershell.exe Write-Output 'Normal 11'",
+    "event_id": 4104
+  },
+  {
+    "timestamp": "2025-09-13T11:59:12Z",
+    "user": "user",
+    "command_line": "powershell.exe Write-Output 'Normal 12'",
+    "event_id": 4104
+  },
+  {
+    "timestamp": "2025-09-13T11:59:13Z",
+    "user": "user",
+    "command_line": "powershell.exe Write-Output 'Normal 13'",
+    "event_id": 4104
+  },
+  {
+    "timestamp": "2025-09-13T11:59:14Z",
+    "user": "user",
+    "command_line": "powershell.exe Write-Output 'Normal 14'",
+    "event_id": 4104
+  },
+  {
+    "timestamp": "2025-09-13T11:59:15Z",
+    "user": "user",
+    "command_line": "powershell.exe Write-Output 'Normal 15'",
+    "event_id": 4104
+  },
+  {
+    "timestamp": "2025-09-13T11:59:16Z",
+    "user": "user",
+    "command_line": "powershell.exe Write-Output 'Normal 16'",
+    "event_id": 4104
+  },
+  {
+    "timestamp": "2025-09-13T11:59:17Z",
+    "user": "user",
+    "command_line": "powershell.exe Write-Output 'Normal 17'",
+    "event_id": 4104
+  },
+  {
+    "timestamp": "2025-09-13T11:59:18Z",
+    "user": "user",
+    "command_line": "powershell.exe Write-Output 'Normal 18'",
+    "event_id": 4104
+  },
+  {
+    "timestamp": "2025-09-13T11:59:19Z",
+    "user": "user",
+    "command_line": "powershell.exe Write-Output 'Normal 19'",
+    "event_id": 4104
+  }
+]

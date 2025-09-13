@@ -1,0 +1,107 @@
+[
+  {
+    "timestamp": "2025-09-13T11:15:00Z",
+    "query": "evilsubdomain.duckdns.org",
+    "client_ip": "192.168.1.100"
+  },
+  {
+    "timestamp": "2025-09-13T11:00:00Z",
+    "query": "service0.internal.local",
+    "client_ip": "192.168.1.10"
+  },
+  {
+    "timestamp": "2025-09-13T11:00:01Z",
+    "query": "service1.internal.local",
+    "client_ip": "192.168.1.10"
+  },
+  {
+    "timestamp": "2025-09-13T11:00:02Z",
+    "query": "service2.internal.local",
+    "client_ip": "192.168.1.10"
+  },
+  {
+    "timestamp": "2025-09-13T11:00:03Z",
+    "query": "service3.internal.local",
+    "client_ip": "192.168.1.10"
+  },
+  {
+    "timestamp": "2025-09-13T11:00:04Z",
+    "query": "service4.internal.local",
+    "client_ip": "192.168.1.10"
+  },
+  {
+    "timestamp": "2025-09-13T11:00:05Z",
+    "query": "service5.internal.local",
+    "client_ip": "192.168.1.10"
+  },
+  {
+    "timestamp": "2025-09-13T11:00:06Z",
+    "query": "service6.internal.local",
+    "client_ip": "192.168.1.10"
+  },
+  {
+    "timestamp": "2025-09-13T11:00:07Z",
+    "query": "service7.internal.local",
+    "client_ip": "192.168.1.10"
+  },
+  {
+    "timestamp": "2025-09-13T11:00:08Z",
+    "query": "service8.internal.local",
+    "client_ip": "192.168.1.10"
+  },
+  {
+    "timestamp": "2025-09-13T11:00:09Z",
+    "query": "service9.internal.local",
+    "client_ip": "192.168.1.10"
+  },
+  {
+    "timestamp": "2025-09-13T11:00:10Z",
+    "query": "service10.internal.local",
+    "client_ip": "192.168.1.10"
+  },
+  {
+    "timestamp": "2025-09-13T11:00:11Z",
+    "query": "service11.internal.local",
+    "client_ip": "192.168.1.10"
+  },
+  {
+    "timestamp": "2025-09-13T11:00:12Z",
+    "query": "service12.internal.local",
+    "client_ip": "192.168.1.10"
+  },
+  {
+    "timestamp": "2025-09-13T11:00:13Z",
+    "query": "service13.internal.local",
+    "client_ip": "192.168.1.10"
+  },
+  {
+    "timestamp": "2025-09-13T11:00:14Z",
+    "query": "service14.internal.local",
+    "client_ip": "192.168.1.10"
+  },
+  {
+    "timestamp": "2025-09-13T11:00:15Z",
+    "query": "service15.internal.local",
+    "client_ip": "192.168.1.10"
+  },
+  {
+    "timestamp": "2025-09-13T11:00:16Z",
+    "query": "service16.internal.local",
+    "client_ip": "192.168.1.10"
+  },
+  {
+    "timestamp": "2025-09-13T11:00:17Z",
+    "query": "service17.internal.local",
+    "client_ip": "192.168.1.10"
+  },
+  {
+    "timestamp": "2025-09-13T11:00:18Z",
+    "query": "service18.internal.local",
+    "client_ip": "192.168.1.10"
+  },
+  {
+    "timestamp": "2025-09-13T11:00:19Z",
+    "query": "service19.internal.local",
+    "client_ip": "192.168.1.10"
+  }
+]

@@ -27,6 +27,7 @@
    - Перезавантаж комп’ютер після встановлення
 
 2. Встанови **Git for Windows**: [https://git-scm.com/download/win](https://git-scm.com/download/win)
+3. Встанови Cursor AI
 
 #### 🍎 macOS:
 1. Встанови **Docker Desktop for Mac**: [https://www.docker.com/products/docker-desktop/](https://www.docker.com/products/docker-desktop/)
@@ -37,13 +38,14 @@
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 brew install git
 ```
-
+3. Встанови Cursor AI
 #### 🐧 Linux (Ubuntu/Debian):
 ```bash
 sudo apt update && sudo apt install -y docker.io git
 sudo systemctl enable docker && sudo systemctl start docker
 sudo usermod -aG docker $USER
 ```
+Встанови Cursor AI
 Після цього **перезавантаж** систему або вийди й зайди знову, щоб застосувались зміни.
 
 ---

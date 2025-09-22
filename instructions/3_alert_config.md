@@ -1,4 +1,4 @@
-# 04 - Alert Configuration
+3 - Alert Configuration
 
 1. From SPL search result, click `Save As → Alert`
 2. Name: `Suspicious PowerShell Alert`

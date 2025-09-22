@@ -1,8 +1,8 @@
-# 07 – Real-Time Logging with HEC
+04 – Real-Time Logging with HEC
 
 This lab shows how to send logs to Splunk in real-time using the HTTP Event Collector (HEC).
 
-## 1. Enable HEC in Splunk
+1. Enable HEC in Splunk
 
 - Go to: Settings → Data Inputs → HTTP Event Collector
 - Click "New Token"
@@ -12,13 +12,13 @@ This lab shows how to send logs to Splunk in real-time using the HTTP Event Coll
   - Keep SSL disabled for localhost
 - Save the token shown (e.g., `D1234567-...`)
 
-## 2. Send data via curl
+2. Send data via curl
 
 ```bash
 curl -k https://localhost:8088/services/collector   -H "Authorization: Splunk <token>"   -d '{"event": {"type":"heartbeat","source":"student"}}'
 ```
 
-## 3. Or use Python
+3. Or use Python
 
 ```python
 import requests
@@ -30,7 +30,7 @@ requests.post(
 )
 ```
 
-## 4. Search in Splunk
+4. Search in Splunk
 
 ```spl
 index=main source="lab-script"

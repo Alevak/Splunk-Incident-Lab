@@ -1,47 +1,61 @@
-# 06 – Additional Use Cases
+🛡️ Use Case Descriptions
 
-This section includes alternative detection scenarios using different datasets.
+Suspicious PowerShell Encoded Command
+Файл логів: `sysmon_powershell_base64.json`
 
----
+Цей юз-кейс виявляє використання PowerShell з параметром `-enc`, який означає запуск закодованої у Base64 команди. Це типовий прийом для приховування шкідливого скрипту, який часто використовується при атаках з використанням PowerShell.
 
-## 🐧 Linux: Suspicious Execution from /tmp
-
-- **Goal**: Detect scripts or binaries launched from /tmp
-- **SPL**:
+SPL Запит:
 ```spl
-index=main sourcetype=linux_logs command="/tmp/*"
+index=main sourcetype=sysmon Image=*powershell.exe* CommandLine="*-enc*"
 ```
-- **Sample file**: `linux_tmp_exec.json`
 
----
+Виявлення використання Mimikatz
+Файл логів**: `windows_mimikatz.json`
 
-## 🪟 Windows: Execution of Mimikatz
+Цей юз-кейс орієнтований на виявлення запуску інструменту Mimikatz, який використовується для крадіжки облікових даних у Windows-системах. У логах можна побачити згадки про mimikatz або специфічні функції, що викликаються цим інструментом.
 
-- **Goal**: Detect known credential dumping tool
-- **SPL**:
+SPL Запит:
 ```spl
-index=main sourcetype=sysmon Image="*mimikatz.exe*"
+index=main sourcetype=sysmon CommandLine=*mimikatz*
 ```
-- **Sample file**: `windows_mimikatz.json`
 
----
+Brute-force атака на облікові записи
+Файл логів: `sysmon_bruteforce.json`
 
-## 🐧 Linux: Sudo with NOPASSWD
+Цей юз-кейс імітує спробу брутфорсу логінів у Windows. У логах видно послідовні невдалі логіни з коротким інтервалом між ними, що є характерною ознакою brute-force атак.
 
-- **Goal**: Find escalation or misconfigured sudo access
-- **SPL**:
+SPL Запит:
 ```spl
-index=main sourcetype=auth_logs message="*NOPASSWD*"
+index=main sourcetype=sysmon EventCode=4625 | stats count by Account_Name, IpAddress
 ```
-- **Sample file**: `linux_sudo_nopasswd.json`
 
----
+Виконання файлу з каталогу /tmp
+Файл логів**: `linux_tmp_exec.json`
 
-## 🌐 DNS: Dynamic DNS (duckdns)
+Виконання бінарників або скриптів із каталогу `/tmp` в Linux є типовим шаблоном для зловмисних дій, оскільки цей каталог часто використовується як тимчасове місце зберігання шкідливих компонентів.
 
-- **Goal**: Detect use of dynamic DNS services
-- **SPL**:
+SPL Запит:
 ```spl
-index=main sourcetype=dns_logs query="*.duckdns.org"
+index=main sourcetype=linux_logs CommandLine="/tmp/*"
 ```
-- **Sample file**: `network_dns_duckdns.json`
+
+Підозріле використання sudo без пароля
+Файл логів**: `linux_sudo_nopasswd.json`
+
+Якщо в Linux-конфігурації вказано `NOPASSWD` у sudoers-файлі, це дозволяє запускати команди з правами суперкористувача без пароля. Це може бути легальним, але часто використовується при ескалації привілеїв.
+
+SPL Запит:
+```spl
+index=main sourcetype=linux_logs CommandLine=*sudo* AND CommandLine=*NOPASSWD*
+```
+
+DNS-запити до динамічного DNS-сервісу (duckdns)
+Файл логів**: `network_dns_duckdns.json`
+
+Виявлення DNS-запитів до сервісів типу `duckdns.org` допомагає ідентифікувати потенційне використання динамічних C2 (Command & Control) серверів. Такі сервіси часто використовуються шкідливим ПЗ для обходу фільтрації або забезпечення стійкого з’єднання.
+
+SPL Запит:
+```spl
+index=main sourcetype=dns_logs query=*duckdns.org*
+```

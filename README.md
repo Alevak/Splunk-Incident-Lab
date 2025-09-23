@@ -76,6 +76,13 @@ sudo usermod -aG docker $USER
 
 📦 Частина 2. Клонування лабораторної
 
+🔹 Як відкрити репозиторій у Cursor:
+	1.	Відкрийте Cursor
+	2.	Виберіть Clone from GitHub
+	3.	Вставте:
+ https://github.com/AleVak/splunk-incident-lab.git
+
+Якщо не використовуємо Cursor IDE, тоді клонуємо через CLI
 ```bash
 git clone https://github.com/AleVak/splunk-incident-lab.git
 cd splunk-incident-lab
@@ -96,7 +103,7 @@ docker-compose up -d
 Потім відкрий браузер і перейдіть за посиланням: [http://localhost:8000](http://localhost:8000)
 
 - Ім’я користувача: `admin`
-- Пароль: `changeme`
+- Пароль: `changeme123`
 
 > Якщо не відкривається — перевір, чи Docker працює, і повтори `docker-compose up -d`
 

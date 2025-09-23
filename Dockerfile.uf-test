@@ -1,9 +1,24 @@
-FROM ubuntu:20.04
+# syntax=docker/dockerfile:1
 
-ENV DEBIAN_FRONTEND=noninteractive
+FROM --platform=linux/amd64 ubuntu:22.04
 
-RUN apt update &&     apt install -y wget gnupg curl &&     wget -O splunkforwarder.tgz 'https://download.splunk.com/products/universalforwarder/releases/9.1.1/linux/splunkforwarder-9.1.1-64e843ea36b1-Linux-x86_64.tgz' &&     mkdir -p /opt &&     tar -xvzf splunkforwarder.tgz -C /opt &&     rm splunkforwarder.tgz
+# Оновлення та залежності
+RUN apt-get update && \
+    apt-get install -y wget curl gnupg2 systemctl net-tools iputils-ping && \
+    apt-get clean
 
-EXPOSE 8089
+# Завантаження та встановлення Splunk UF
+RUN wget -O splunkforwarder.tgz 'https://download.splunk.com/products/universalforwarder/releases/9.1.0/linux/splunkforwarder-9.1.0.1-cbff15bbfe42-Linux-x86_64.tgz' && \
+    tar -xvzf splunkforwarder.tgz && \
+    mv splunkforwarder /opt/splunkforwarder && \
+    rm splunkforwarder.tgz
 
-CMD ["/opt/splunkforwarder/bin/splunk", "start", "--nodaemon", "--accept-license"]
+# Копіюємо стартовий скрипт
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
+# Вказуємо робочу директорію
+WORKDIR /opt/splunkforwarder
+
+# Запуск через entrypoint
+ENTRYPOINT ["/entrypoint.sh"]

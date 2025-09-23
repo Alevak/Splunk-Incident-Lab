@@ -1,17 +1,17 @@
-version: '3.7'
+version: '3.8'
 
 services:
   splunk:
     image: splunk/splunk:9.1
-    platform: linux/amd64
     container_name: splunk
+    platform: linux/amd64
     environment:
       - SPLUNK_START_ARGS=--accept-license
-      - SPLUNK_PASSWORD=changeme
+      - SPLUNK_PASSWORD=changeme123
     ports:
-      - "8000:8000"   # UI
-      - "8088:8088"   # HEC
-      - "9997:9997"   # Forwarder port
+      - "8000:8000"
+      - "8088:8088"
+      - "9997:9997"
     volumes:
       - splunk-data:/opt/splunk/var
 
@@ -20,9 +20,10 @@ services:
       context: .
       dockerfile: Dockerfile.uf-test
     container_name: test-linux
-    privileged: true
+    platform: linux/amd64
     depends_on:
       - splunk
+    tty: true
 
 volumes:
   splunk-data:

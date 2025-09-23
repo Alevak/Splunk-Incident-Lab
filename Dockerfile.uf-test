@@ -8,7 +8,7 @@ RUN apt-get update && \
     apt-get clean
 
 # Завантаження та встановлення Splunk UF
-RUN wget -O splunkforwarder.tgz 'https://download.splunk.com/products/universalforwarder/releases/9.1.0/linux/splunkforwarder-9.1.0.1-cbff15bbfe42-Linux-x86_64.tgz' && \
+RUN wget -O splunkforwarder.tgz 'https://download.splunk.com/products/universalforwarder/releases/9.1.2/linux/splunkforwarder-9.1.2-77f73c9edb85-Linux-x86_64.tgz' && \
     tar -xvzf splunkforwarder.tgz && \
     mv splunkforwarder /opt/splunkforwarder && \
     rm splunkforwarder.tgz

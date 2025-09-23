@@ -1,24 +1,25 @@
-# syntax=docker/dockerfile:1
+FROM ubuntu:22.04
 
-FROM --platform=linux/amd64 ubuntu:22.04
+ENV DEBIAN_FRONTEND=noninteractive
 
-# Оновлення та залежності
-RUN apt-get update && \
-    apt-get install -y wget curl gnupg2 systemctl net-tools iputils-ping && \
-    apt-get clean
+# 🔧 Оновлення та залежності
+RUN apt-get update && apt-get install -y wget curl gnupg2 apt-transport-https ca-certificates lsb-release
 
-# Завантаження та встановлення Splunk UF
-RUN wget -O splunkforwarder.tgz 'https://download.splunk.com/products/universalforwarder/releases/10.0.0/linux/splunkforwarder-10.0.0-e8eb0c4654f8-linux-amd64.tgz' && \
+# 📥 Завантаження та встановлення Splunk Universal Forwarder
+RUN wget -O splunkforwarder.tgz 'https://download.splunk.com/products/universalforwarder/releases/10.1.1/linux/splunkforwarder-10.1.1-e21634c0c686-Linux-x86_64.tgz' && \
     tar -xvzf splunkforwarder.tgz && \
     mv splunkforwarder /opt/splunkforwarder && \
     rm splunkforwarder.tgz
 
-# Копіюємо стартовий скрипт
+# ✅ Створення скрипту запуску
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
-# Вказуємо робочу директорію
+# 🛡 Відкриття портів (опційно, бо працюємо як агент)
+EXPOSE 8089 9997
+
+# 📍 Робоча директорія
 WORKDIR /opt/splunkforwarder
 
-# Запуск через entrypoint
+# 🚀 Запуск Forwarder з автоконфігом
 ENTRYPOINT ["/entrypoint.sh"]

@@ -1,1 +1,1 @@
-source="network_dns_duckdns.json" host="e29a98ff2ee0" index="main" sourcetype="_json" query="*.duckdns.org"
+source="network_dns_duckdns.json" index="main" sourcetype="_json" query="*.duckdns.org"

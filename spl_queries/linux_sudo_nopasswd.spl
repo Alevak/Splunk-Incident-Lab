@@ -1,1 +1,1 @@
-index=main sourcetype=auth_logs message="*NOPASSWD*"
+source="linux_sudo_nopasswd.json" index="main" sourcetype="_json" auth="NOPASSWD"

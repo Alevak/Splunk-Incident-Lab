@@ -1,1 +1,1 @@
-index=main sourcetype=linux_logs command="/tmp/*"
+source="linux_tmp_exec.json" sourcetype="_json" exec="/tmp/malware.sh"

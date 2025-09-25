@@ -1,1 +1,5 @@
-index=main sourcetype=sysmon EventCode=4625
+source="bruteforce_sample_mixed.json" sourcetype="_json" EventID="4625"
+| bin _time span=1h
+| stats count as failed_attempts by IpAddress, UserName, _time
+| where failed_attempts >= 3
+| sort - failed_attempts

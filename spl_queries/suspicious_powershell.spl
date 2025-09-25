@@ -1,1 +1,1 @@
-index=main sourcetype=sysmon Image=*powershell.exe* CommandLine="*-enc*"
+source="sysmon_powershell_base64.json" index="main" sourcetype="_json" command_line="*-enc*"

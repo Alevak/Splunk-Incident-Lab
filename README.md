@@ -20,29 +20,29 @@
 Нижче — короткий огляд файлової структури репозиторію та призначення кожного каталогу/файлу. Це допоможе студентам швидко зорієнтуватися та знайти потрібні матеріали.
 
 instructions/
-├── 1_environment_setup_and_troubleshooting.md   # Гайд: підготовка середовища (Windows/macOS/Linux) + Troubleshooting
-├── 2_upload_logs.md                              # Як завантажувати лог-файли в Splunk через UI (Upload)
-├── 3_use_cases_eng.md                            # Опис use-case’ів англійською (SPL + логіка)
-├── 3_use_cases_ua.md                             # Опис use-case’ів українською (SPL + логіка)
-├── 4_alert_config.md                             # Інструкція: як зберегти пошук як Alert у Splunk
-└── 5_universal_forwarder.md                      # Як налаштувати Splunk Universal Forwarder (без HEC)
+├── 1_environment_setup_and_troubleshooting.md   | Гайд: підготовка середовища (Windows/macOS/Linux) + Troubleshooting
+├── 2_upload_logs.md                             | Як завантажувати лог-файли в Splunk через UI (Upload)
+├── 3_use_cases_eng.md                            | Опис use-case’ів англійською (SPL + логіка)
+├── 3_use_cases_ua.md                             | Опис use-case’ів українською (SPL + логіка)
+├── 4_alert_config.md                             | Інструкція: як зберегти пошук як Alert у Splunk
+└── 5_universal_forwarder.md                      | Як налаштувати Splunk Universal Forwarder (без HEC)
 log_samples/
-├── linux_sudo_nopasswd.json                      # Приклад: зміни sudoers / NOPASSWD (Linux)
-├── linux_tmp_exec.json                           # Приклад: виконання файлів із /tmp (Linux)
-├── network_dns_duckdns.json                      # Приклад: DNS-запити до *.duckdns.org
-├── sysmon_bruteforce.json                        # Приклад: Windows failed-logon (EventID 4625)
-├── sysmon_powershell_base64.json                 # Приклад: PowerShell із base64 / обфускація
+├── linux_sudo_nopasswd.json                      | Приклад: зміни sudoers / NOPASSWD (Linux)
+├── linux_tmp_exec.json                           | Приклад: виконання файлів із /tmp (Linux)
+├── network_dns_duckdns.json                      | Приклад: DNS-запити до *.duckdns.org
+├── sysmon_bruteforce.json                        | Приклад: Windows failed-logon (EventID 4625)
+├── sysmon_powershell_base64.json                 | Приклад: PowerShell із base64 / обфускація
 spl_queries/
-├── linux_sudo_nopasswd.spl                       # SPL для виявлення sudo NOPASSWD
-├── linux_tmp_exec.spl                            # SPL для виконання з /tmp
-├── network_dns_duckdns.spl                       # SPL для DNS-запитів до duckdns
-├── suspicious_powershell.spl                     # SPL для підозрілих PowerShell-команд
-└── sysmon_bruteforce.spl                         # SPL для пошуку brute-force (EventID 4625)
+├── linux_sudo_nopasswd.spl                       | SPL для виявлення sudo NOPASSWD
+├── linux_tmp_exec.spl                            | SPL для виконання з /tmp
+├── network_dns_duckdns.spl                       | SPL для DNS-запитів до duckdns
+├── suspicious_powershell.spl                     | SPL для підозрілих PowerShell-команд
+└── sysmon_bruteforce.spl                         | SPL для пошуку brute-force (EventID 4625)
 
-Dockerfile.uf-test                                 # Dockerfile для тестового Linux з UF
-docker-compose.yml                                 # Compose для підняття Splunk + тестового Linux
-entrypoint.sh                                      # Шаблон entrypoint для UF-контейнера (старт rsyslog/sshd/UF)
-README.md                                          # Головна інструкція (цей файл)
+Dockerfile.uf-test                                | Dockerfile для тестового Linux з UF
+docker-compose.yml                                | Compose для підняття Splunk + тестового Linux
+entrypoint.sh                                     | Шаблон entrypoint для UF-контейнера (старт rsyslog/sshd/UF)
+README.md                                         | Головна інструкція (цей файл)
 
 ---
 Основні кроки практичної роботи%

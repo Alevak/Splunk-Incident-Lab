@@ -9,9 +9,9 @@ services:
       - SPLUNK_START_ARGS=--accept-license
       - SPLUNK_PASSWORD=changeme123
     ports:
-      - "8000:8000"
-      - "8088:8088"
-      - "9997:9997"
+      - "8000:8000"   # Web
+      - "8088:8088"   # HEC (може стати у пригоді)
+      - "9997:9997"   # receiving from UF
     volumes:
       - splunk-data:/opt/splunk/var
 
@@ -23,7 +23,10 @@ services:
     platform: linux/amd64
     depends_on:
       - splunk
+    stdin_open: true
     tty: true
+    ports:
+      - "2222:22"   # для SSH brute-force
 
 volumes:
   splunk-data:

@@ -2,24 +2,34 @@ FROM ubuntu:22.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-# 🔧 Оновлення та залежності
-RUN apt-get update && apt-get install -y wget curl gnupg2 apt-transport-https ca-certificates lsb-release
+# 🔧 Оновлення та залежності + rsyslog + openssh-server + утиліти
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+      wget curl gnupg2 apt-transport-https ca-certificates lsb-release \
+      rsyslog openssh-server dnsutils procps iproute2 net-tools sudo iputils-ping sshpass logger && \
+    rm -rf /var/lib/apt/lists/*
 
-# 📥 Завантаження та встановлення Splunk Universal Forwarder
-RUN wget -O splunkforwarder.tgz 'https://download.splunk.com/products/universalforwarder/releases/10.0.0/linux/splunkforwarder-10.0.0-e8eb0c4654f8-linux-amd64.tgz' && \
-    tar -xvzf splunkforwarder.tgz && \
-    mv splunkforwarder /opt/splunkforwarder && \
-    rm splunkforwarder.tgz
+# 📥 Завантаження та встановлення Splunk Universal Forwarder (зараз у тебе 10.0.0)
+# Якщо URL зміниться — заміни на робочий лінк
+RUN wget -O /tmp/splunkforwarder.tgz 'https://download.splunk.com/products/universalforwarder/releases/10.0.0/linux/splunkforwarder-10.0.0-e8eb0c4654f8-linux-amd64.tgz' && \
+    tar -xvzf /tmp/splunkforwarder.tgz -C /tmp && \
+    mv /tmp/splunkforwarder /opt/splunkforwarder && \
+    rm /tmp/splunkforwarder.tgz || true
 
-# ✅ Створення скрипту запуску
+# 🔐 Налаштування SSH: створимо директорію для runtime ключів і дозволимо парольну автентифікацію
+RUN mkdir -p /run/sshd && \
+    sed -i 's/^#\?PasswordAuthentication .*/PasswordAuthentication yes/' /etc/ssh/sshd_config || true
+
+# ✅ Створення скрипту запуску (entrypoint) — ти надаси свій робочий entrypoint
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
-# 🛡 Відкриття портів (опційно, бо працюємо як агент)
-EXPOSE 8089 9997
+# 🛡 Відкриття портів
+EXPOSE 22        # SSH для тестів брутфорсу (мапимо на хост у docker-compose)
+EXPOSE 8089 9997 # UF/management & forwarder port
 
 # 📍 Робоча директорія
 WORKDIR /opt/splunkforwarder
 
-# 🚀 Запуск Forwarder з автоконфігом
+# 🚀 Запуск Forwarder з автоконфігом через entrypoint
 ENTRYPOINT ["/entrypoint.sh"]

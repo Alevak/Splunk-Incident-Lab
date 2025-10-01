@@ -37,14 +37,12 @@
 | ├── network_dns_duckdns.json | Приклад: DNS-запити до `duckdns.org` (можливий C2) |
 | ├── sysmon_bruteforce.json | Приклад: Windows-події невдалих входів (EventID 4625) |
 | ├── sysmon_powershell_base64.json | Приклад: PowerShell з base64-командою (обфускація) |
-| ├── windows_mimikatz.json | Приклад: події, пов’язані з Mimikatz (збирання облікових даних) |
 | **spl_queries/** | 📂 Збережені SPL-запити для швидкого використання у Splunk |
 | ├── linux_sudo_nopasswd.spl | SPL для виявлення NOPASSWD у sudo-конфігурації |
 | ├── linux_tmp_exec.spl | SPL для пошуку виконань з `/tmp` |
 | ├── network_dns_duckdns.spl | SPL для виявлення DNS-запитів до duckdns |
 | ├── suspicious_powershell.spl | SPL для підозрілих PowerShell-команд (наприклад `-enc`) |
 | ├── sysmon_bruteforce.spl | SPL для виявлення brute-force (агрегація EventID 4625) |
-| ├── windows_mimikatz.spl | SPL для виявлення активності, пов’язаної з Mimikatz |
 | **Dockerfile.uf-test** | Dockerfile для тестової Linux-машини з Universal Forwarder (UF), rsyslog та sshd |
 | **docker-compose.yml** | Compose-файл для підняття стеку: Splunk + тестова Linux-машина |
 | **entrypoint.sh** | Entrypoint для UF-контейнера (автонастройка UF, монітори логів) |

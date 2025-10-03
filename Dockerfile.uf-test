@@ -1,35 +1,50 @@
-FROM ubuntu:22.04
+#!/bin/bash
+set -euo pipefail
 
-ENV DEBIAN_FRONTEND=noninteractive
+SPLUNK_HOME=/opt/splunkforwarder
+SPLUNK_BIN=$SPLUNK_HOME/bin/splunk
+SPLUNK_USER=admin
+SPLUNK_PASS=${SPLUNK_PASS:-changeme123}
+FORWARDER_TARGET=${FORWARDER_TARGET:-splunk:9997}
 
-# 🔧 Оновлення та залежності + rsyslog + openssh-server + утиліти
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
-      wget curl gnupg2 apt-transport-https ca-certificates lsb-release \
-      rsyslog openssh-server dnsutils procps iproute2 net-tools sudo iputils-ping sshpass logger && \
-    rm -rf /var/lib/apt/lists/*
+# Start rsyslog (so /var/log/auth.log and /var/log/syslog are populated)
+if command -v rsyslogd >/dev/null 2>&1; then
+  echo "[i] Starting rsyslogd..."
+  /usr/sbin/rsyslogd
+else
+  echo "[!] rsyslogd not found"
+fi
 
-# 📥 Завантаження та встановлення Splunk Universal Forwarder (зараз у тебе 10.0.0)
-# Якщо URL зміниться — заміни на робочий лінк
-RUN wget -O /tmp/splunkforwarder.tgz 'https://download.splunk.com/products/universalforwarder/releases/10.0.0/linux/splunkforwarder-10.0.0-e8eb0c4654f8-linux-amd64.tgz' && \
-    tar -xvzf /tmp/splunkforwarder.tgz -C /tmp && \
-    mv /tmp/splunkforwarder /opt/splunkforwarder && \
-    rm /tmp/splunkforwarder.tgz || true
+# Start sshd
+if [ -f /usr/sbin/sshd ]; then
+  echo "[i] Starting sshd..."
+  /usr/sbin/sshd
+fi
 
-# 🔐 Налаштування SSH: створимо директорію для runtime ключів і дозволимо парольну автентифікацію
-RUN mkdir -p /run/sshd && \
-    sed -i 's/^#\?PasswordAuthentication .*/PasswordAuthentication yes/' /etc/ssh/sshd_config || true
+# First-time splunk UF seed password and initial start
+if [ ! -f "$SPLUNK_HOME/etc/passwd" ]; then
+  echo "[i] First-run: starting splunk to create admin user..."
+  $SPLUNK_BIN start --accept-license --answer-yes --no-prompt --seed-passwd "$SPLUNK_PASS"
+  $SPLUNK_BIN stop
+fi
 
-# ✅ Створення скрипту запуску (entrypoint) — ти надаси свій робочий entrypoint
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+# Start splunk forwarder
+echo "[i] Starting Splunk UF..."
+$SPLUNK_BIN start --accept-license --answer-yes --no-prompt || true
 
-# 🛡 Відкриття портів
-EXPOSE 22        # SSH для тестів брутфорсу (мапимо на хост у docker-compose)
-EXPOSE 8089 9997 # UF/management & forwarder port
+# Login (ensure commands authenticated)
+$SPLUNK_BIN login -auth "${SPLUNK_USER}:${SPLUNK_PASS}" || true
 
-# 📍 Робоча директорія
-WORKDIR /opt/splunkforwarder
+# Configure forward-server (idempotent)
+$SPLUNK_BIN add forward-server "${FORWARDER_TARGET}" -auth "${SPLUNK_USER}:${SPLUNK_PASS}" || true
 
-# 🚀 Запуск Forwarder з автоконфігом через entrypoint
-ENTRYPOINT ["/entrypoint.sh"]
+# Add monitors if not already present
+$SPLUNK_BIN list monitor | grep '/var/log/auth.log' || $SPLUNK_BIN add monitor /var/log/auth.log -sourcetype linux_auth -index main -auth "${SPLUNK_USER}:${SPLUNK_PASS}"
+$SPLUNK_BIN list monitor | grep '/var/log/syslog' || $SPLUNK_BIN add monitor /var/log/syslog -sourcetype syslog -index main -auth "${SPLUNK_USER}:${SPLUNK_PASS}"
+
+# show status
+$SPLUNK_BIN list forward-server -auth "${SPLUNK_USER}:${SPLUNK_PASS}"
+$SPLUNK_BIN list monitor -auth "${SPLUNK_USER}:${SPLUNK_PASS}"
+
+# Keep container alive with a shell
+exec /bin/bash

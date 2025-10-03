@@ -10,7 +10,7 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends \
       ca-certificates curl gnupg2 apt-transport-https \
       busybox rsync openssh-server dnsutils procps iproute2 net-tools \
-      sudo iputils-ping sshpass logger tar gzip && \
+      sudo iputils-ping sshpass tar gzip && \
     rm -rf /var/lib/apt/lists/*
 
 # Install Splunk UF (тут вкажи робочий URL/версію як build-arg)
